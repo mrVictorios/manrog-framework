@@ -1,7 +1,7 @@
 {
   "name"              : "manrog/framework",
   "minimum-stability" : "stable",
-  "type"              : "framework",,
+  "type"              : "framework",
   "license"           : "BSD-3-Clause",
   "support"           : {
     "authors" : [
@@ -20,7 +20,7 @@
   },
   "autoload"          : {
     "psr-4" : {
-      "manrog\\"   : "./src/lib/manrog",
+      "manrog\\"   : "./src/lib/manrog"
     }
   },
   "require"           : {
@@ -32,6 +32,6 @@
     "pdepend/pdepend"       : "2.2.*",
     "phpmetrics/phpmetrics" : "v1.8.*",
     "phploc/phploc"         : "3.0.*",
-    "theseer/phpdox"        : "0.8.1.*",
+    "theseer/phpdox"        : "0.8.1.*"
   }
 }
