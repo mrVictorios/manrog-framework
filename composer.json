@@ -1,0 +1,37 @@
+{
+  "name"              : "manrog/framework",
+  "minimum-stability" : "stable",
+  "type"              : "framework",,
+  "license"           : "BSD-3-Clause",
+  "support"           : {
+    "authors" : [
+      {
+        "name"  : "Manuel Rogoll",
+        "email" : "manuel.rogoll@manrog.de",
+        "role"  : "lead"
+      }
+    ]
+  },
+  "config"            : {
+    "bin-dir"  : "./bin",
+    "platform" : {
+      "php" : "5.6"
+    }
+  },
+  "autoload"          : {
+    "psr-4" : {
+      "manrog\\"   : "./src/lib/manrog",
+    }
+  },
+  "require"           : {
+    "php"                   : ">=5.6",
+    "phpunit/phpunit"       : "5.3.*",
+    "burti/vfsstream"       : "v1.0.0-beta5",
+    "sebastian/phpcpd"      : "2.0.*",
+    "phpmd/phpmd"           : "2.3.*",
+    "pdepend/pdepend"       : "2.2.*",
+    "phpmetrics/phpmetrics" : "v1.8.*",
+    "phploc/phploc"         : "3.0.*",
+    "theseer/phpdox"        : "0.8.1.*",
+  }
+}
