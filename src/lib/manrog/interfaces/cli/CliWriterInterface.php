@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of peet-util.
+ * This file is part of manrog-framework
  *
  * (c) Manuel Rogoll <manuel.rogoll@manrog.de>
  *

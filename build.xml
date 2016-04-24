@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="framework" default="setup">
+
+    <property name="basedir" value="."/>
+
+    <target name="setup" depends="clean,get-composer, install" description="Clean installation and get composer"/>
+    <target name="install" depends="composer-install, validate" description="Install project"/>
+    <target name="validate-seq" depends="phpunit,phpcpd,phpmd,phploc,phpmetrics,phpdox" description="Validate project sequential"/>
+    <target name="validate" description="Validate project parallel">
+        <parallel threadCount="2">
+            <antcall target="phpunit"/>
+            <antcall target="phpcpd"/>
+            <antcall target="phploc"/>
+            <antcall target="phpmd"/>
+            <antcall target="phpmetrics"/>
+            <antcall target="phpdox"/>
+        </parallel>
+    </target>
+
+    <target name="clean" depends="clean-build" description="Clean installation">
+        <delete dir="${basedir}/bin"/>
+        <delete dir="${basedir}/vendor"/>
+        <delete dir="${basedir}/docs"/>
+        <delete file="${basedir}/composer.phar"/>
+    </target>
+
+    <target name="clean-build" description="Cleanup build dir">
+        <delete dir="${basedir}/build"/>
+    </target>
+
+    <target name="get-composer" description="Install dependencies with Composer - PHAR">
+        <tstamp>
+            <format property="thirty.days.ago" pattern="MM/dd/yyyy hh:mm aa" offset="-30" unit="day"/>
+        </tstamp>
+        <delete>
+            <fileset dir="${basedir}">
+                <include name="composer.phar"/>
+                <date datetime="${thirty.days.ago}" when="before"/>
+            </fileset>
+        </delete>
+
+        <get src="https://getcomposer.org/composer.phar" dest="${basedir}/composer.phar" skipexisting="true"/>
+    </target>
+
+    <target name="composer-install" description="Install dependencies with Composer">
+        <exec executable="php">
+            <arg value="composer.phar"/>
+            <arg value="install"/>
+        </exec>
+    </target>
+
+    <target name="update-autoload" description="update Autoloader">
+        <exec executable="composer">
+            <arg value="dump-autoload"/>
+        </exec>
+    </target>
+
+    <target name="phpunit" description="Run Unit Tests with phpunit">
+        <exec executable="${basedir}/bin/phpunit">
+            <arg value="--configuration"/>
+            <arg value="${basedir}/phpunit.xml"/>
+        </exec>
+    </target>
+
+    <target name="phpcpd" description="Search duplicated code with phpcpd">
+        <exec executable="${basedir}/bin/phpcpd">
+            <arg value="--exclude"/>
+            <arg value="vendor"/>
+            <arg value="--exclude"/>
+            <arg value="tests"/>
+            <arg value="--log-pmd"/>
+            <arg value="./build/logs/phpcpd.xml"/>
+            <arg value="${basedir}"/>
+        </exec>
+    </target>
+
+    <target name="phpmd" description="Checks codesize, naming and searching unused code with phpmd">
+        <exec executable="${basedir}/bin/phpmd">
+            <arg value="${basedir}"/>
+            <arg value="xml"/>
+            <arg value="codesize,unusedcode,naming,design,cleancode"/>
+            <arg value="--exclude"/>
+            <arg value="vendor"/>
+            <arg value="--exclude"/>
+            <arg value="tests"/>
+            <arg value="--reportfile"/>
+            <arg value="./build/logs/phpmd.xml"/>
+        </exec>
+    </target>
+
+    <target name="phploc" description="get size of project">
+        <exec executable="${basedir}/bin/phploc">
+            <arg value="--log-xml=${basedir}/build/logs/phploc.xml"/>
+            <arg value="--log-csv=${basedir}/build/logs/phploc.csv"/>
+            <arg value="--exclude=vendor"/>
+            <arg value="--count-tests"/>
+            <arg value="."/>
+        </exec>
+    </target>
+
+    <target name="phpmetrics" description="get project report">
+        <exec executable="${basedir}/bin/phpmetrics">
+            <arg value="--config="/>
+            <arg value="phpmetrics.yml"/>
+        </exec>
+    </target>
+
+    <target name="phpdox" description="generate documentation">
+        <exec executable="${basedir}/bin/phpdox"/>
+    </target>
+
+</project>
