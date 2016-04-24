@@ -15,7 +15,6 @@ install:
 
 script:
   - ./bin/phpunit
-  - ./bin/phpunit --configuration ./phpunit.xml > /dev/null; if [ $? -eq 0 ]; then echo "SHOULD FAIL"; false; else echo "fail checked"; fi;
   - xmllint --noout --schema phpunit.xsd phpunit.xml
 
 notifications:
