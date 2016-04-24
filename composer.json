@@ -1,9 +1,9 @@
 {
   "name"              : "manrog/framework",
   "minimum-stability" : "stable",
-  "type"              : "lightweight framework",
+  "type"              : "framework",
   "description"       : "",
-  "homepage": "https://github.com/mrVictorios/manrog-framework",
+  "homepage"          : "https://github.com/mrVictorios/manrog-framework",
   "license"           : "BSD-3-Clause",
   "support"           : {
     "authors" : [
