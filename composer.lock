@@ -4,9 +4,10 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8efbfe7055f282844cef9e5845cfe309",
-    "content-hash": "c8596085d384e7b87049011ae04e5421",
-    "packages": [
+    "hash": "d103e37641034966b276ca9d5e0291ab",
+    "content-hash": "aa20ea7a7b6f40346575c092c6dd6370",
+    "packages": [],
+    "packages-dev": [
         {
             "name": "burti/vfsstream",
             "version": "v1.0.0-beta5",
@@ -2744,7 +2745,6 @@
             "time": "2016-01-25 21:22:18"
         }
     ],
-    "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
